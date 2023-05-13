@@ -10,4 +10,6 @@ export const endpoints = {
   removeFromCart: baseUrl + "user/removeFromCart/",
   getProductList: baseUrl + "product/list",
   addProduct: baseUrl + "product/create",
+  getProductHistory: baseUrl + "BookingHistory/"
+
 };
