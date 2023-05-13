@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
+import { login } from "../redux/actions/user_action";
+import { connect } from "react-redux";
 
 class Login extends Component {
   constructor(props) {
@@ -12,6 +14,13 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  fetchUser() {
+    this.props.login();
+  }
 
   handleEmailChange = (event) => {
     this.setState({ email: event.target.value });
@@ -23,6 +32,9 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      navigate: true,
+    });
     console.log(`Email: ${this.state.email} Password: ${this.state.password}`);
   };
 
@@ -89,11 +101,21 @@ class Login extends Component {
           </Col>
           <Col></Col>
         </Row>
-        {navigate && <Navigate to="/register" replace="true" />}
+        {navigate && <Navigate to="/product-list" replace="true" />}
+        {/* {navigate && <Navigate to="/register" replace="true" />} */}
       </Container>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: () => dispatch(login()),
+  };
+};
 
-export default Login;
+const mapStateToProps = ({ userReducer }) => ({
+  userData: userReducer.userData,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
