@@ -126,3 +126,4 @@ const mapStateToProps = ({ userReducer }) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
+

@@ -1,4 +1,5 @@
 import { parseAPIReponse } from "./response_parser";
+import  { default as axios } from "axios";
 
 export const callBackendAPI =
   (url, method, data, type, classIns) => (dispatch) => {
@@ -30,3 +31,18 @@ export const callBackendAPI =
       });
   };
 
+
+  export const callMultiPartAPI = (url, formData, type) => (dispatch) => {
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      },
+    };
+
+    return axios.post(url, formData, config)
+      .then((res) => {
+        dispatch(parseAPIReponse(type, res.data));
+      })
+      .catch(function () {
+      });
+  };

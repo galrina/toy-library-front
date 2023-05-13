@@ -25,8 +25,10 @@ class AddProduct extends Component {
 
     const { name, description, price, image } = this.state;
 
+    // Retrieve existing products from local storage
     const existingProducts = JSON.parse(localStorage.getItem("products")) || [];
 
+    // Add the new product to the list
     const newProduct = {
       id: Date.now(),
       name,
@@ -36,8 +38,10 @@ class AddProduct extends Component {
     };
     const updatedProducts = [...existingProducts, newProduct];
 
+    // Store the updated list back in the local storage
     localStorage.setItem("products", JSON.stringify(updatedProducts));
 
+    // Reset the form state
     this.setState({
       name: "",
       description: "",

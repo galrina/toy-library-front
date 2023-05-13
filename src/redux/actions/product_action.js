@@ -3,8 +3,9 @@ import {
     GET_PRODUCT_LIST,
     ADD_PRODUCT,
     COMPLETE_PRODUCT_CREATE,
+    EDIT_PRODUCT,
  } from "../types";
-import { callBackendAPI } from "./generic_action";
+import { callBackendAPI, callMultiPartAPI } from "./generic_action";
 
 
 export const getProductList = () => (dispatch) => {
@@ -12,7 +13,11 @@ export const getProductList = () => (dispatch) => {
   };
 
 export const addProduct = (formdata) => dispatch => {
-    dispatch(callBackendAPI(endpoints.addProduct, "POST", formdata, ADD_PRODUCT))
+    dispatch(callMultiPartAPI(endpoints.addProduct, formdata, ADD_PRODUCT))
+}
+
+export const editProduct = (formdata) => dispatch => {
+    dispatch(callMultiPartAPI(endpoints.editProduct, formdata, EDIT_PRODUCT));
 }
 
 export const completeCreateProduct = () => dispatch => {
